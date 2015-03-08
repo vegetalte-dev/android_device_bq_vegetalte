@@ -164,6 +164,14 @@ on post-fs-data
 
     # Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
+    
+    # For touchscreen update
+    chown system system /proc/ctp_upgrade
+    chown system system /proc/ctp_version
+    chown system system /proc/ctp_selftest
+    chown system system /proc/ctp_if_upgrade
+    chown system system /proc/ctp_if_upgrade_version
+    chown system system /proc/ctp_if_upgrade_old_version
 	
     # For gesture_open
     chown system system /proc/gesture_open
