@@ -23,8 +23,6 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-$(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-
 # ANT+
 PRODUCT_PACKAGES += \
     AntHalService \
