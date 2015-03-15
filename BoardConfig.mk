@@ -28,9 +28,7 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := cortex-a53
-TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
@@ -57,13 +55,12 @@ TARGET_KERNEL_MODULES += WLAN_MODULES
 TARGET_OTA_ASSERT_DEVICE := aquarise5,vegetalte
 
 # ANT+
-BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
+BOARD_ANT_WIRELESS_DEVICE := "qualcomm-smd"
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
-TARGET_QCOM_AUDIO_VARIANT := caf
-AUDIO_FEATURE_DISABLED_DS1_DOLBY_DDP := true
-AUDIO_FEATURE_MDM_DETECT := true
+AUDIO_FEATURE_ENABLED_FLAC_OFFLOAD := false
+AUDIO_FEATURE_ENABLED_FM := true
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/bq/vegetalte/bluetooth
@@ -74,13 +71,12 @@ BLUETOOTH_HCI_USE_MCT := true
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_USE_VENDOR_CAMERA_EXT := true
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-
-# Classpath
-PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
 
 # Enable suspend during charger mode
 BOARD_CHARGER_ENABLE_SUSPEND := true
+
+# Add suffix variable to uniquely identify the board
+TARGET_BOARD_SUFFIX := _32
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
@@ -94,12 +90,11 @@ BOARD_CACHEIMAGE_PARTITION_SIZE    := 1040187392
 BOARD_PERSISTIMAGE_PARTITION_SIZE  := 28311552
 BOARD_FLASH_BLOCK_SIZE             := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
-# FM
-BOARD_HAVE_QCOM_FM := true
+# Fonts
+EXTENDED_FONT_FOOTPRINT := true
 
 # Graphics
 BOARD_EGL_CFG := device/bq/vegetalte/configs/egl.cfg
-TARGET_QCOM_DISPLAY_VARIANT := caf-new
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
@@ -116,43 +111,29 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
 
-# init
+# Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_PROVIDES_INIT_RC := true
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
-
-# Media
-TARGET_QCOM_MEDIA_VARIANT := caf-new
-TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_USES_QCOM_BSP := true
+
+# Added to indicate that protobuf-c is supported in this build
+PROTOBUF_SUPPORTED := true
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/bq/vegetalte/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_SUPPRESS_EMMC_WIPE := true
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
-COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
 # SELinux
-BOARD_SEPOLICY_DIRS += \
-    device/bq/vegetalte/sepolicy
-
-# The list below is order dependent
-BOARD_SEPOLICY_UNION += \
-    file.te \
-    device.te \
-    app.te \
-    file_contexts
+include device/qcom/sepolicy/sepolicy.mk
+BOARD_SEPOLICY_DIRS += device/bq/vegetalte/sepolicy
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true

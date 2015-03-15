@@ -37,6 +37,7 @@
 /dev/smd7                 0660   bluetooth  bluetooth
 /dev/smd8                 0660   system     system
 /dev/ccid_bridge          0660   system     system
+/dev/rmnet_ctrl           0660   usb        usb
 
 # Permissions for CSVT
 /dev/smd11                0660   radio      radio
@@ -50,6 +51,7 @@
 /dev/smdcntl5             0640   radio      radio
 /dev/smdcntl6             0640   radio      radio
 /dev/smdcntl7             0640   radio      radio
+/dev/smdcntl8             0640   radio      radio
 /dev/smdcnt_rev0          0640   radio      radio
 /dev/smdcnt_rev1          0640   radio      radio
 /dev/smdcnt_rev2          0640   radio      radio
@@ -202,6 +204,9 @@
 /sys/devices/virtual/bst/ACC                        uevent                 0660    input    system
 /sys/devices/virtual/bst/ACC                        value                  0660    input    system
 /sys/devices/virtual/bst/ACC                        value_cache            0660    input    system
+
+# SSR devices
+/dev/subsys_*             0640   system     system
 
 # Wlan
 /dev/wcnss_wlan           0660   system     system

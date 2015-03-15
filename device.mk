@@ -14,14 +14,10 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
-
-PRODUCT_TAGS += dalvik.gc.type-precise
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
@@ -33,8 +29,8 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+    audiod \
     audio.primary.msm8916 \
-    audio_policy.msm8916 \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default
@@ -64,9 +60,12 @@ PRODUCT_PACKAGES += \
     camera.msm8916 \
     libmm-qcamera
     
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
+    
 # Charger
 PRODUCT_PACKAGES += \
-    charger_bq \
+    charger \
     charger_res_images
 
 # CRDA
@@ -84,8 +83,7 @@ PRODUCT_PACKAGES += \
     copybit.msm8916 \
     gralloc.msm8916 \
     hwcomposer.msm8916 \
-    memtrack.msm8916 \
-    liboverlay
+    memtrack.msm8916
 
 # Ebtables
 PRODUCT_PACKAGES += \
@@ -137,18 +135,16 @@ PRODUCT_PACKAGES += \
 # Media
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml
 
 # OMX
 PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
     libdashplayer \
-    libdivxdrmdecrypt \
-    libOmxAacEnc \
-    libOmxAmrEnc \
     libOmxCore \
-    libOmxEvrcEnc \
-    libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVdecHevc \
     libOmxVenc \
@@ -165,6 +161,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+    frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
@@ -183,11 +180,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     power.msm8916
 
-# QRNG
-PRODUCT_PACKAGES += \
-    qrngd \
-    qrngp
-
 # Qualcomm
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true \
@@ -197,42 +189,38 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
-    init.rc \
     init.qcom.rc \
     init.qcom.usb.rc \
     ueventd.qcom.rc
 
-# Recovery
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.enable_key_repeat=true \
-    ro.cwm.forbid_mount=/persist,/firmware \
-    ro.cwm.forbid_format=/fsg,/firmware,/boot,/persist
-
-# Torch
 PRODUCT_PACKAGES += \
-    Torch
+    init.qcom.bms.sh
 
 # USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     persist.usb.serialno=1234567890ABCDEF
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.isUsbOtgEnabled=1
+
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
-# UTC date
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-
 # Wifi
 PRODUCT_PACKAGES += \
-    hostapd.accept \
-    hostapd.deny \
     hostapd_default.conf \
     p2p_supplicant_overlay.conf \
     wpa_supplicant_overlay.conf \
     WCNSS_cfg.dat \
     WCNSS_qcom_cfg.ini \
     WCNSS_qcom_wlan_nv.bin
+
+PRODUCT_PACKAGES += \
+    dhcpcd.conf \
+    hostapd \
+    wpa_supplicant \
+    wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
     libwcnss_qmi \

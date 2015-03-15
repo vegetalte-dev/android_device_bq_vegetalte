@@ -31,17 +31,23 @@ endif
 LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/../stack/common \
         frameworks/native/include/media/openmax \
-        hardware/qcom/display-caf-new/libgralloc \
-        hardware/qcom/media-caf-new/libstagefrighthw \
+        $(call project-path-for,qcom-display)/libgralloc \
+        $(call project-path-for,qcom-media)/libstagefrighthw \
         $(LOCAL_PATH)/../../mm-image-codec/qexif \
         $(LOCAL_PATH)/../../mm-image-codec/qomx_core \
         $(LOCAL_PATH)/../util \
         $(LOCAL_PATH)/wrapper
+        
+ifeq ($(call is-platform-sdk-version-at-least,20),true)
+LOCAL_C_INCLUDES += system/media/camera/include
+else
+LOCAL_CFLAGS += -DUSE_KK_CODE
+endif
 
 ifeq ($(TARGET_USE_VENDOR_CAMERA_EXT),true)
-LOCAL_C_INCLUDES += hardware/qcom/display-caf-new/msm8974/libgralloc
+LOCAL_C_INCLUDES += $(call project-path-for,qcom-display)/msm8974/libgralloc
 else
-LOCAL_C_INCLUDES += hardware/qcom/display-caf-new/libgralloc
+LOCAL_C_INCLUDES += $(call project-path-for,qcom-display)/libgralloc
 endif
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/media
