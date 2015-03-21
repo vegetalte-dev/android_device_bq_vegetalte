@@ -74,7 +74,6 @@ BLUETOOTH_HCI_USE_MCT := true
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_USE_VENDOR_CAMERA_EXT := true
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
 # Classpath
 PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
@@ -116,7 +115,7 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
 
-# init
+# Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 TARGET_PROVIDES_INIT_RC := true
 
@@ -176,5 +175,5 @@ WIFI_DRIVER_FW_PATH_AP := "ap"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 TARGET_USES_WCNSS_CTRL := true
 
-# inherit from the proprietary version
+# Inherit from the proprietary version
 -include vendor/bq/vegetalte/BoardConfigVendor.mk

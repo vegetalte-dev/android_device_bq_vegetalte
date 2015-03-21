@@ -233,9 +233,6 @@ on property:bluetooth.hciattach=true
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
-# Enable tintless for camera shading
-setprop persist.camera.tintless enable
-
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
     class main
@@ -246,9 +243,9 @@ service netmgrd /system/bin/netmgrd
     class main
     
 service sensord /system/bin/sensord
+    class main
     user system
     group system
-    class main
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
@@ -351,7 +348,7 @@ service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
     oneshot
    
 service loc_launcher /system/bin/loc_launcher
-    #loc_launcher will start as root and set its uid to gps
+    # loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet net_raw qcom_diag net_admin wifi
 
@@ -368,11 +365,6 @@ service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
     group root
     oneshot
     disabled
-
-service qcom-sh /system/bin/sh /init.qcom.sh
-    class late_start
-    user root
-    oneshot
     
 service wifi-crda /system/bin/sh /system/etc/init.crda.sh
    class late_start
@@ -464,9 +456,9 @@ on property:init.svc.surfaceflinger=stopped
 
 on property:init.svc.surfaceflinger=running
     start ppd
-    
-service qcom-sh /system/bin/sh /init.qcom.sh
-    class late_start
+
+service bms-sh /system/bin/sh /init.qcom.bms.sh
+    class main
     user root
     oneshot
 

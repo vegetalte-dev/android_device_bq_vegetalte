@@ -199,6 +199,9 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.usb.rc \
     ueventd.qcom.rc
+    
+PRODUCT_PACKAGES += \
+    init.qcom.bms.sh
 
 # Recovery
 PRODUCT_PROPERTY_OVERRIDES += \
