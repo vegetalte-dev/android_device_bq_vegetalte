@@ -138,6 +138,7 @@ COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
 # RIL
 TARGET_RIL_VARIANT := caf
+PROTOBUF_SUPPORTED := true
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
