@@ -68,6 +68,10 @@ PRODUCT_PACKAGES += \
     charger \
     charger_res_images
 
+# Connectivity
+PRODUCT_PACKAGES += \
+    libcnefeatureconfig
+
 # CRDA
 PRODUCT_PACKAGES += \
     crda \
@@ -223,6 +227,9 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
+    libcurl \
+    libqsap_sdk \
+    libQWiFiSoftApCfg \
     libwcnss_qmi \
     wcnss_service
     

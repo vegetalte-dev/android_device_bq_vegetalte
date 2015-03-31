@@ -635,8 +635,8 @@ void *QCameraHeapMemory::getPtr(int index) const
  *==========================================================================*/
 int QCameraHeapMemory::allocate(int count, int size)
 {
-    int heap_id_mask = 0x1 << ION_IOMMU_HEAP_ID;
-    int rc = alloc(count, size, heap_id_mask);
+    int heap_mask = 0x1 << ION_IOMMU_HEAP_ID;
+    int rc = alloc(count, size, heap_mask);
     if (rc < 0)
         return rc;
 
@@ -676,8 +676,8 @@ int QCameraHeapMemory::allocate(int count, int size)
  *==========================================================================*/
 int QCameraHeapMemory::allocateMore(int count, int size)
 {
-    int heap_id_mask = 0x1 << ION_IOMMU_HEAP_ID;
-    int rc = alloc(count, size, heap_id_mask);
+    int heap_mask = 0x1 << ION_IOMMU_HEAP_ID;
+    int rc = alloc(count, size, heap_mask);
     if (rc < 0)
         return rc;
 
@@ -855,8 +855,8 @@ QCameraStreamMemory::~QCameraStreamMemory()
  *==========================================================================*/
 int QCameraStreamMemory::allocate(int count, int size)
 {
-    int heap_id_mask = 0x1 << ION_IOMMU_HEAP_ID;
-    int rc = alloc(count, size, heap_id_mask);
+    int heap_mask = 0x1 << ION_IOMMU_HEAP_ID;
+    int rc = alloc(count, size, heap_mask);
     if (rc < 0)
         return rc;
 
@@ -882,8 +882,8 @@ int QCameraStreamMemory::allocate(int count, int size)
  *==========================================================================*/
 int QCameraStreamMemory::allocateMore(int count, int size)
 {
-    int heap_id_mask = 0x1 << ION_IOMMU_HEAP_ID;
-    int rc = alloc(count, size, heap_id_mask);
+    int heap_mask = 0x1 << ION_IOMMU_HEAP_ID;
+    int rc = alloc(count, size, heap_mask);
     if (rc < 0)
         return rc;
 

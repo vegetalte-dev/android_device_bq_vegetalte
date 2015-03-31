@@ -74,6 +74,7 @@ TARGET_USE_VENDOR_CAMERA_EXT := true
 
 # Enable suspend during charger mode
 BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_CHARGER_SHOW_PERCENTAGE := true
 
 # Add suffix variable to uniquely identify the board
 TARGET_BOARD_SUFFIX := _32
