@@ -76,6 +76,15 @@ TARGET_USE_VENDOR_CAMERA_EXT := true
 # Charger
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 
+# Dex-preoptimization
+ifeq ($(HOST_OS),linux)
+  ifeq ($(call match-word-in-list,$(TARGET_BUILD_VARIANT),user),true)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif
+
 # Add suffix variable to uniquely identify the board
 TARGET_BOARD_SUFFIX := _32
 
