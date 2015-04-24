@@ -137,6 +137,9 @@ BOARD_SUPPRESS_EMMC_WIPE := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
+# RIL
+TARGET_RIL_VARIANT := caf
+
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/bq/vegetalte/sepolicy
