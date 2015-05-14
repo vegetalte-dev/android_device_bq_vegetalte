@@ -144,6 +144,13 @@ on post-fs-data
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
 
+    # Create folder for mm-qcamera-daemon
+    mkdir /data/camera 0770 media camera
+    mkdir /data/misc/camera 0770 camera camera
+    
+    # Create directory used by display clients
+    mkdir /data/misc/display 0770 system graphics
+
     # Create directories for Location services
     mkdir /data/misc/location 0770 gps gps
     mkdir /data/misc/location/mq 0770 gps gps
@@ -232,6 +239,9 @@ on property:bluetooth.hciattach=true
 
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
+
+# Enable tintless for camera shading
+setprop persist.camera.tintless enable
 
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
@@ -348,7 +358,7 @@ service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
     oneshot
    
 service loc_launcher /system/bin/loc_launcher
-    # loc_launcher will start as root and set its uid to gps
+    #loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet net_raw qcom_diag net_admin wifi
 
@@ -372,16 +382,16 @@ service wifi-crda /system/bin/sh /system/etc/init.crda.sh
    disabled
    oneshot
 
-service ril-daemon1 /system/bin/rild -c 1
+service ril-daemon2 /system/bin/rild -c 2
     class main
-    socket rild1 stream 660 root radio
-    socket rild-debug1 stream 660 radio system
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
     user root
     disabled
     group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
     
 on property:persist.radio.multisim.config=dsds
-    start ril-daemon1
+    start ril-daemon2
 
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start
@@ -412,21 +422,6 @@ service thermal-engine /system/bin/thermal-engine
     class main
     user root
     group root
-   
-service qrngd /system/bin/qrngd -f
-    class main
-    user root
-    group root
-
-service qrngp /system/bin/qrngp -f
-    class main
-    user root
-    group root
-    oneshot
-    disabled
-   
-on property:sys.boot_completed=1
-    start qrngp
  
 service qseecomd /system/bin/qseecomd
     class core
@@ -439,7 +434,7 @@ service clientsetup /system/bin/qseecom_sample_client v sampleapp 14 1
     oneshot   
 
 service wcnss-service /system/bin/wcnss_service
-    class late_start
+    class main
     user system
     group system wifi radio
     oneshot
@@ -467,7 +462,7 @@ service vm_bms /system/bin/vm_bms
     group root
     disabled
 
-service charger /charger_bq
+service charger /charger
     class charger
 
 on charger
