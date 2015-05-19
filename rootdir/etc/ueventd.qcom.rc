@@ -82,6 +82,7 @@
 /dev/msm_qcelp_in         0660   system     audio
 /dev/msm_evrc_in          0660   system     audio
 /dev/msm_amrnb_in         0640   system     audio
+/dev/msm_audio_cal        0660   system     audio
 /dev/msm_acdb             0660   system     audio
 /dev/msm_rtac             0660   system     audio
 /dev/radio0               0640   fm_radio   fm_radio

@@ -138,6 +138,9 @@ on boot
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
 
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
+
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
 
