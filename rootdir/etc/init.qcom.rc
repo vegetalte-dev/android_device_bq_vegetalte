@@ -164,6 +164,7 @@ on post-fs-data
     mkdir /data/misc/location/gsiff 0770 gps gps
 
     # Create directory for hostapd
+    mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/hostapd 0770 system wifi
 
     # Create /data/time folder for time-services
