@@ -66,7 +66,8 @@ on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
 on fs
-    mount_all ./fstab.qcom
+    mount_all fstab.qcom
+    swapon_all fstab.qcom
     restorecon_recursive /persist
     setprop ro.crypto.fuse_sdcard true
 
