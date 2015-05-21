@@ -558,7 +558,7 @@
     <path name="speaker">
         <ctl name="RX3 MIX1 INP1" value="RX1" />
         <ctl name="SPK DAC Switch" value="1" />
-        <ctl name="RX3 Digital Volume" value="80" />
+        <ctl name="RX3 Digital Volume" value="82" />
     </path>
 
     <path name="speaker-mic">
@@ -577,7 +577,7 @@
     <path name="handset-mic">
         <path name="adc1" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
-	<ctl name="ADC1 Volume" value="12" />
+	<ctl name="ADC1 Volume" value="15" />
     </path>
 
    <!-- add for secondary mic -->
