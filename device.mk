@@ -79,9 +79,6 @@ PRODUCT_PACKAGES += \
     linville.key.pub.pem \
     regdbdump \
     regulatory.bin
-    
-PRODUCT_PACKAGES += \
-    init.crda.sh
 
 # Display
 PRODUCT_PACKAGES += \
