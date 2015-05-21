@@ -31,6 +31,11 @@ debug.enable.sglscale=1
 ro.opengles.version=196608
 ro.sf.lcd_density=320
 
+# Enable B service
+ro.sys.fw.bservice_enable=true
+ro.sys.fw.bservice_limit=5
+ro.sys.fw.bservice_age=5000
+
 # GPS
 ro.gps.agps_provider=1
 ro.qc.sdk.izat.premium.enabled=0
