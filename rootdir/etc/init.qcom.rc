@@ -499,8 +499,6 @@ on property:sys.boot_completed=1
     
     # HMP scheduler settings
     write /proc/sys/kernel/sched_window_stats_policy 3
-    
-    # HMP scheduler load tracking settings
     write /proc/sys/kernel/sched_ravg_hist_size 3
     
     # HMP Task packing settings
@@ -516,22 +514,6 @@ on property:sys.boot_completed=1
 
     # Enable Power modes
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled 1
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -550,34 +532,35 @@ on property:init.svc.bootanim=stopped
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 2
     write /dev/cpuctl/apps/cpu.notify_on_migrate 1
     
-# CM Performance Profiles
+# CyanogenMod Performance Profiles
 
 # Powersave
 on property:sys.perf.profile=0
-    stop mpdecision
+    start mpdecision
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor powersave
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor powersave
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor powersave
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1209600
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1209600
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1209600
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1209600
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1094400
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 1094400
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 1094400
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 1094400
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor powersave
     write /sys/class/devfreq/qcom,cpubw.30/governor powersave
-    start mpdecision
 
 # Balanced
 on property:sys.perf.profile=1
     stop mpdecision
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1209600
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1209600
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1209600
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1209600
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor msm-adreno-tz
     write /sys/class/devfreq/qcom,cpubw.30/governor msm_cpufreq
     start mpdecision
@@ -585,7 +568,6 @@ on property:sys.perf.profile=1
 # Performance
 on property:sys.perf.profile=2
     stop mpdecision
-    write /sys/devices/system/cpu/cpu0/online 1
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -593,9 +575,5 @@ on property:sys.perf.profile=2
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor performance
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor performance
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor performance
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1209600
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1209600
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1209600
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1209600
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor performance
     write /sys/class/devfreq/qcom,cpubw.30/governor performance
