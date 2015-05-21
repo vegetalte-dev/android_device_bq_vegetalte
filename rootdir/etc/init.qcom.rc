@@ -192,6 +192,10 @@ on post-fs-data
 	
     # For gesture_open
     chown system system /proc/gesture_open
+    
+    # Color calibration control
+    chown system system /sys/devices/virtual/graphics/fb0/rgb
+    chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed"

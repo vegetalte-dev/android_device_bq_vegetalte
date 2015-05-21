@@ -79,6 +79,9 @@ TARGET_USE_VENDOR_CAMERA_EXT := true
 # Charger
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 
+# CMHW
+BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/src
+
 # Dex-preoptimization
 ifeq ($(HOST_OS),linux)
   ifeq ($(call match-word-in-list,$(TARGET_BUILD_VARIANT),user),true)
