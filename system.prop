@@ -77,5 +77,12 @@ persist.data.target=dpm1
 persist.radio.proc_nw_scan=1
 ro.telephony.call_ring.multiple=false
 
+# Trim
+ro.sys.fw.use_trim_settings=true
+ro.sys.fw.empty_app_percent=50
+ro.sys.fw.trim_empty_percent=100
+ro.sys.fw.trim_cache_percent=100
+ro.sys.fw.trim_enable_memory=1073741824
+
 # OTA
 cm.updater.uri=http://ota1.randomdroids.com/api
