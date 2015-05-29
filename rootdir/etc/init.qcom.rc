@@ -155,14 +155,6 @@ on post-fs-data
     mkdir /data/camera 0770 media camera
     mkdir /data/misc/camera 0770 camera camera
     
-    # Create PERFD daemon related dirs
-    mkdir /data/misc/perfd 0770 root system
-    chmod 2770 /data/misc/perfd
-    mkdir /data/misc/perfd 0755 root system
-    chmod 2755 /data/misc/perfd
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
-    
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
     mkdir /persist/display 0770 system graphics
@@ -446,8 +438,7 @@ service audiod /system/bin/audiod
    user system
    group system
 
-service perfd /system/bin/perfd
-   class main
+service mpdecision /system/bin/mpdecision --avg_comp
    user root
    disabled
 
@@ -552,7 +543,7 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
-    start perfd
+    start mpdecision
     
 on property:init.svc.bootanim=stopped
     # Switch to ROW and balanced mode after boot for better UX
@@ -571,7 +562,7 @@ on property:init.svc.bootanim=stopped
 
 # Powersave
 on property:sys.perf.profile=0
-    start perfd
+    start mpdecision
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -590,7 +581,7 @@ on property:sys.perf.profile=0
 
 # Balanced
 on property:sys.perf.profile=1
-    stop perfd
+    stop mpdecision
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -600,11 +591,11 @@ on property:sys.perf.profile=1
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor ondemand
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor msm-adreno-tz
     write /sys/class/devfreq/qcom,cpubw.30/governor msm_cpufreq
-    start perfd
+    start mpdecision
 
 # Performance
 on property:sys.perf.profile=2
-    stop perfd
+    stop mpdecision
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
