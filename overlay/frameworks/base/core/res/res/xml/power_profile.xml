@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <device name="Android">
     <item name="none">0</item>
-    <item name="screen.on">63</item>
-    <item name="screen.full">261</item>
-    <item name="bluetooth.active">93.5</item>
+    <item name="screen.on">108.4</item>
+    <item name="screen.full">236.6</item>
+    <item name="bluetooth.active">51.5</item>
     <item name="bluetooth.on">3.6</item>
     <item name="wifi.on">1.7</item>
     <item name="wifi.active">131</item>
@@ -12,10 +12,10 @@
     <item name="dsp.video">63</item>
     <item name="radio.active">159</item>
     <item name="radio.scanning">4</item>
-    <item name="gps.on">46</item>
+    <item name="gps.on">38.6</item>
     <array name="radio.on">
-        <value>3.9</value>
-        <value>2.8</value>
+        <value>16</value>
+        <value>1.4</value>
     </array>
     <array name="cpu.speeds">
         <value>200000</value>
