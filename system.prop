@@ -20,6 +20,7 @@ persist.sys.fm=qn8035
 
 # Camera
 persist.camera.cpp.duplication=false
+persist.camera.pip.support=0
 
 # CNE
 persist.cne.feature=1
