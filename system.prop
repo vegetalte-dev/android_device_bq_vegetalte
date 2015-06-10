@@ -62,7 +62,7 @@ media.stagefright.use-awesome=false
 vidc.enc.narrow.searchrange=1
 
 # Perfd
-ro.vendor.extension_library=libqti-perfd-client.so
+ro.min_freq_0=800000
 
 # Set max background services
 ro.config.max_starting_bg=8

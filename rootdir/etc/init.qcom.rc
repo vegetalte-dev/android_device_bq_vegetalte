@@ -154,6 +154,12 @@ on post-fs-data
     # Create folder for mm-qcamera-daemon
     mkdir /data/camera 0770 media camera
     mkdir /data/misc/camera 0770 camera camera
+
+    # Create PERFD deamon related dirs
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
+    mkdir /data/system/perfd 0770 root system
+    chmod 2770 /data/system/perfd
     
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
@@ -438,7 +444,8 @@ service audiod /system/bin/audiod
    user system
    group system
 
-service mpdecision /system/bin/mpdecision --avg_comp
+service perfd /system/bin/perfd
+   class main
    user root
    disabled
 
@@ -519,6 +526,14 @@ on property:sys.sn_set=1
     start set_sn
 
 on property:sys.boot_completed=1
+
+    # Enable Power modes
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    
+on property:init.svc.bootanim=stopped
     # Enable adaptive LMK and set vmpressure_file_min
     write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
     write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
@@ -538,14 +553,7 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu2/sched_mostly_idle_nr_run 3
     write /sys/devices/system/cpu/cpu3/sched_mostly_idle_nr_run 3
 
-    # Enable Power modes
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    start mpdecision
-    
-on property:init.svc.bootanim=stopped
+
     # Switch to ROW and balanced mode after boot for better UX
     write /sys/block/mmcblk0/queue/scheduler row
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
@@ -557,12 +565,13 @@ on property:init.svc.bootanim=stopped
     write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 2
     write /dev/cpuctl/apps/cpu.notify_on_migrate 1
+    start perfd
     
 # CyanogenMod Performance Profiles
 
 # Powersave
 on property:sys.perf.profile=0
-    start mpdecision
+    start perfd
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -581,7 +590,7 @@ on property:sys.perf.profile=0
 
 # Balanced
 on property:sys.perf.profile=1
-    stop mpdecision
+    stop perfd
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -591,11 +600,11 @@ on property:sys.perf.profile=1
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor ondemand
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor msm-adreno-tz
     write /sys/class/devfreq/qcom,cpubw.30/governor msm_cpufreq
-    start mpdecision
+    start perfd
 
 # Performance
 on property:sys.perf.profile=2
-    stop mpdecision
+    stop perfd
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
