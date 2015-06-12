@@ -191,14 +191,7 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     ueventd.qcom.rc
 
-PRODUCT_PACKAGES += \
-    init.qcom.bms.sh
-
 # USB
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp \
-    persist.usb.serialno=1234567890ABCDEF
-
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=1
 
