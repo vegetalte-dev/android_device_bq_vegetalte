@@ -97,7 +97,7 @@ BOARD_PERSISTIMAGE_PARTITION_SIZE  := 28311552
 BOARD_FLASH_BLOCK_SIZE             := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 # FM
-BOARD_HAVE_QCOM_FM := true
+TARGET_QCOM_NO_FM_FIRMWARE := true
 
 # Graphics
 BOARD_EGL_CFG := device/bq/vegetalte/configs/egl.cfg

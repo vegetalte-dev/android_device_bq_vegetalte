@@ -104,9 +104,6 @@ PRODUCT_PACKAGES += \
     FMRecord \
     libqcomfm_jni \
     qcom.fmradio
-
-PRODUCT_PACKAGES += \
-    init.qcom.fm.sh
     
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:system/etc/flp.conf \
