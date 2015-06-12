@@ -519,11 +519,11 @@ on property:init.svc.bootanim=stopped
     write /proc/sys/kernel/sched_ravg_hist_size 3
     
     # HMP Task packing settings
-    write /proc/sys/kernel/sched_small_task 30
-    write /sys/devices/system/cpu/cpu0/sched_mostly_idle_load 50
-    write /sys/devices/system/cpu/cpu1/sched_mostly_idle_load 50
-    write /sys/devices/system/cpu/cpu2/sched_mostly_idle_load 50
-    write /sys/devices/system/cpu/cpu3/sched_mostly_idle_load 50
+    write /proc/sys/kernel/sched_small_task 20
+    write /sys/devices/system/cpu/cpu0/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu1/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu2/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu3/sched_mostly_idle_load 30
     write /sys/devices/system/cpu/cpu0/sched_mostly_idle_nr_run 3
     write /sys/devices/system/cpu/cpu1/sched_mostly_idle_nr_run 3
     write /sys/devices/system/cpu/cpu2/sched_mostly_idle_nr_run 3
