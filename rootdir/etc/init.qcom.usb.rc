@@ -29,12 +29,10 @@ on init
     write /sys/class/android_usb/android0/f_rndis/manufacturer bq
     write /sys/class/android_usb/android0/f_rndis/vendorID 2A47
     write /sys/class/android_usb/android0/f_rndis/wceis 1
-on property:persist.sys.usb.mode=D3
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
 
 on charger
     setprop sys.usb.config mass_storage
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
 
 on fs
     setprop persist.sys.usb.config diag,serial_smd,serial_tty,mass_storage,adb

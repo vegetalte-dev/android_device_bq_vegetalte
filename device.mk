@@ -199,9 +199,6 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.usb.rc \
     ueventd.qcom.rc
-    
-PRODUCT_PACKAGES += \
-    init.qcom.bms.sh
 
 # Recovery
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -214,10 +211,6 @@ PRODUCT_PACKAGES += \
     Torch
 
 # USB
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp \
-    persist.usb.serialno=1234567890ABCDEF
-
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 

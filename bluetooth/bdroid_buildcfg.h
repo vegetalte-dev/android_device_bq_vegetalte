@@ -20,10 +20,9 @@
 
 #define BTM_DEF_LOCAL_NAME   "bq Aquaris E5"
 
-#define BLUETOOTH_QCOM_SW TRUE
 // Disables read remote device feature
 #define BTA_SKIP_BLE_READ_REMOTE_FEAT FALSE
 #define MAX_L2CAP_CHANNELS    16
 // Skips conn update at conn completion
-#define BTA_BLE_SKIP_CONN_UPD  TRUE
+#define BTA_BLE_SKIP_CONN_UPD  FALSE
 #endif 
