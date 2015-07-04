@@ -192,6 +192,9 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     ueventd.qcom.rc
 
+PRODUCT_PACKAGES += \
+    init.qcom.ril.sh
+
 # USB
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=1
