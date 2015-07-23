@@ -73,7 +73,6 @@ telephony.lteOnCdmaDevice=1
 persist.radio.rat_on=combine
 persist.radio.apm_sim_not_pwdn=1
 persist.radio.multisim.config=dsds
-persist.env.contacts.autosync=true
 persist.env.spec=Default
 persist.radio.mode_pref_nv10=0
 persist.data.target=dpm1
