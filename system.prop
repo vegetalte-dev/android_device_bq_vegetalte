@@ -16,9 +16,6 @@ av.offload.enable=false
 use.voice.path.for.pcm.voip=true
 ro.fm.transmitter=false
 persist.sys.fm=qn8035
-voice.playback.conc.disabled=true
-voice.record.conc.disabled=true
-voice.voip.conc.disabled=true
 
 # CNE
 persist.cne.feature=1
