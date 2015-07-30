@@ -13,6 +13,10 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- This is used to determine whether to hide the
+         preferred application install location settings-->
+    <bool name="config_hide_app_install_location" translatable="false">false</bool>
+
     <!-- Using this on MSIM devices leads to weird states that break telephony's
     internal state machine. All MSIM devices should probably set this to "true"-->
     <bool name="config_disablePreferredNetworkSwitch" translatable="false">true</bool>
