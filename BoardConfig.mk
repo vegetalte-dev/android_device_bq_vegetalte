@@ -68,7 +68,7 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 
 # CMHW
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/src
+BOARD_HARDWARE_CLASS := device/bq/vegetalte/cmhw/src
 
 # Add suffix variable to uniquely identify the board
 TARGET_BOARD_SUFFIX := _32
