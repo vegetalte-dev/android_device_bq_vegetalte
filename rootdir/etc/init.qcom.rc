@@ -133,6 +133,14 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
+    # For touchscreen update
+    chown system system /proc/ctp_upgrade
+    chown system system /proc/ctp_version
+    chown system system /proc/ctp_selftest
+    chown system system /proc/ctp_if_upgrade
+    chown system system /proc/ctp_if_upgrade_version
+    chown system system /proc/ctp_if_upgrade_old_version
+
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
 
@@ -162,17 +170,10 @@ on post-fs-data
 
     # Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
-    
-    # For touchscreen update
-    chown system system /proc/ctp_upgrade
-    chown system system /proc/ctp_version
-    chown system system /proc/ctp_selftest
-    chown system system /proc/ctp_if_upgrade
-    chown system system /proc/ctp_if_upgrade_version
-    chown system system /proc/ctp_if_upgrade_old_version
-	
-    # For gesture_open
+
+    # Tap To Wake
     chown system system /proc/gesture_open
+    chmod 0660 /proc/gesture_open
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed"

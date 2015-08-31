@@ -78,6 +78,9 @@ TARGET_USE_VENDOR_CAMERA_EXT := true
 # Classpath
 PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
 
+# CMHW
+BOARD_HARDWARE_CLASS := device/bq/vegetalte/cmhw/src
+
 # Enable suspend during charger mode
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
