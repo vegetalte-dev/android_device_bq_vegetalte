@@ -74,6 +74,9 @@ PRODUCT_PACKAGES += \
     regdbdump \
     regulatory.bin
 
+PRODUCT_PACKAGES += \
+    init.crda.sh
+
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8916 \

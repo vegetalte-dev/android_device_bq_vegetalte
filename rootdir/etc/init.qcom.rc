@@ -30,7 +30,6 @@ import init.qcom.usb.rc
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     write /sys/block/mmcblk0/queue/scheduler noop
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 512
 
 on init
     # Set permissions for persist partition
@@ -83,7 +82,9 @@ on early-boot
     write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
     write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
     write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
+
     write /sys/kernel/boot_adsp/boot 1
+    chown root audio /sys/kernel/boot_adsp/boot
 
 on boot
     # Enable writing to led blink node from userspace
@@ -198,7 +199,7 @@ on post-fs-data
     chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
 
     # Tap To Wake
-    chown system system /proc/gesture_open
+    chown root system /proc/gesture_open
     chmod 0660 /proc/gesture_open
 
 on property:sys.boot_completed=1
@@ -479,12 +480,11 @@ on property:sys.sn_set=1
 on property:sys.boot_completed=1
 
     # Enable Power modes
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
-on property:init.svc.bootanim=stopped
     # Enable adaptive LMK and set vmpressure_file_min
     write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
     write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
@@ -504,8 +504,11 @@ on property:init.svc.bootanim=stopped
     write /sys/devices/system/cpu/cpu2/sched_mostly_idle_nr_run 3
     write /sys/devices/system/cpu/cpu3/sched_mostly_idle_nr_run 3
 
+on property:init.svc.bootanim=stopped
+
     # Switch to FIOPS and balanced mode after boot for better UX
     write /sys/block/mmcblk0/queue/scheduler fiops
+    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor ondemand
@@ -515,12 +518,14 @@ on property:init.svc.bootanim=stopped
     write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 2
     write /dev/cpuctl/apps/cpu.notify_on_migrate 1
+    write /sys/module/msm_thermal/core_control/enabled 1
     start perfd
 
 # CyanogenMod Performance Profiles
 
 # Powersave
 on property:sys.perf.profile=0
+    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -529,18 +534,17 @@ on property:sys.perf.profile=0
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor powersave
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor powersave
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor powersave
-    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1094400
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 1094400
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 1094400
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 1094400
     write /sys/module/msm_thermal/core_control/enabled 1
-    write /sys/class/kgsl/kgsl-3d0/devfreq/governor powersave
     write /sys/class/devfreq/qcom,cpubw.30/governor powersave
 
 # Balanced
 on property:sys.perf.profile=1
     stop perfd
+    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -548,13 +552,14 @@ on property:sys.perf.profile=1
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor ondemand
-    write /sys/class/kgsl/kgsl-3d0/devfreq/governor msm-adreno-tz
+    write /sys/module/msm_thermal/core_control/enabled 1
     write /sys/class/devfreq/qcom,cpubw.30/governor msm_cpufreq
     start perfd
 
 # Performance
 on property:sys.perf.profile=2
     stop perfd
+    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -562,5 +567,5 @@ on property:sys.perf.profile=2
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor performance
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor performance
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor performance
-    write /sys/class/kgsl/kgsl-3d0/devfreq/governor performance
+    write /sys/module/msm_thermal/core_control/enabled 1
     write /sys/class/devfreq/qcom,cpubw.30/governor performance
