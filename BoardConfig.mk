@@ -176,7 +176,6 @@ WIFI_DRIVER_MODULE_NAME := "wlan"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP := "ap"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
-TARGET_USES_WCNSS_CTRL := true
 
 # Inherit from the proprietary version
 -include vendor/bq/vegetalte/BoardConfigVendor.mk
