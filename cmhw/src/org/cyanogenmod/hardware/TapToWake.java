@@ -17,20 +17,24 @@
 package org.cyanogenmod.hardware;
 
 import org.cyanogenmod.hardware.util.FileUtils;
+import java.io.File;
 
 public class TapToWake {
 
     private static String CONTROL_PATH = "/proc/gesture_open";
 
+    private static boolean mEnabled = true;
+
     public static boolean isSupported() {
-        return true;
+        return new File(CONTROL_PATH).exists();
     }
 
     public static boolean isEnabled()  {
-        return FileUtils.readOneLine(CONTROL_PATH).equals("1");
+        return mEnabled;
     }
 
     public static boolean setEnabled(boolean state)  {
+        mEnabled = state;
         return FileUtils.writeLine(CONTROL_PATH, state ? "1" : "0");
     }
 }
