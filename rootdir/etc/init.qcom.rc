@@ -175,6 +175,10 @@ on post-fs-data
     chown system system /proc/gesture_open
     chmod 0660 /proc/gesture_open
 
+    # Vibrator
+    chown system system /sys/class/timed_output/vibrator/vtg_level
+    chmod 0660 /sys/class/timed_output/vibrator/vtg_level
+
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed"
 
