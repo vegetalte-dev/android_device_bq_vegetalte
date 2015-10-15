@@ -3,7 +3,3 @@ key 257   HEADSETHOOK
 key 258   HEADSETHOOK
 key 259   HEADSETHOOK
 key 260   HEADSETHOOK
-
-# add by Wenke Ma for hall switch key code
-key 546   HALL_OPEN
-key 547   HALL_CLOSE
