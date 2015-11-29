@@ -73,6 +73,7 @@ BOARD_CHARGER_SHOW_PERCENTAGE := true
 
 # CMHW
 BOARD_HARDWARE_CLASS := device/bq/vegetalte/cmhw/src
+TARGET_TAP_TO_WAKE_NODE := "/proc/gesture_open"
 
 # Add suffix variable to uniquely identify the board
 TARGET_BOARD_SUFFIX := _32
