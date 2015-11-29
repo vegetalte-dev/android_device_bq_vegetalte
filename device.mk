@@ -195,9 +195,6 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc
 
 # USB
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.isUsbOtgEnabled=1
-
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
