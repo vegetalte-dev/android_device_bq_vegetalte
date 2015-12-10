@@ -11,9 +11,9 @@ $(call inherit-product, device/bq/vegetalte/full_vegetalte.mk)
 PRODUCT_RELEASE_NAME := Aquaris E5
 PRODUCT_NAME := cm_vegetalte
 
-# Set product name
+# Set product device & name
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=Aquaris_E5
+   TARGET_DEVICE=Aquaris_E5 PRODUCT_NAME=Aquaris_E5
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BUILD_FINGERPRINT=bq/Aquaris_E5/Aquaris_E5:5.1.1/LMY47V/1448015266:user/release-keys \
