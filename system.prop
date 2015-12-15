@@ -78,6 +78,7 @@ persist.env.spec=Default
 persist.radio.mode_pref_nv10=0
 persist.data.target=dpm1
 persist.radio.proc_nw_scan=1
+persist.radio.disable_flexmap=1
 ro.telephony.call_ring.multiple=false
 
 # Trim
