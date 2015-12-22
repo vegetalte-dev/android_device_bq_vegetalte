@@ -126,3 +126,5 @@
 /dev/uio1                 0660   system     system
 /dev/uio2                 0660   system     system
 
+# FRP
+/dev/block/bootdevice/by-name/config                       0600    system      system

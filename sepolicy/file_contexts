@@ -4,5 +4,8 @@
 # CMHW
 /sys/devices/virtual/timed_output/vibrator/vtg_level    u:object_r:vibeamp_sysfs:s0
 
+# FRP
+/dev/block/bootdevice/by-name/config              u:object_r:frp_block_device:s0
+
 # Wifi MAC
 /persist/softmac                              u:object_r:wifi_data_file:s0
