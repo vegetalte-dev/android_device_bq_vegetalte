@@ -18,6 +18,9 @@ use.voice.path.for.pcm.voip=true
 ro.fm.transmitter=false
 persist.sys.fm=qn8035
 
+# Camera
+persist.camera.cpp.duplication=false
+
 # CNE
 persist.cne.feature=1
 

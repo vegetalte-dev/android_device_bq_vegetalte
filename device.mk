@@ -60,7 +60,8 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8916 \
-    libshim_camera
+    libshim_camera \
+    Snap
 
 # Charger
 PRODUCT_PACKAGES += \
