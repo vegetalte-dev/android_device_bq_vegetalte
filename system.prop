@@ -84,4 +84,4 @@ persist.radio.restore_mode_pref=1
 persist.env.c.phone.matchnum=11
 
 # OTA
-cm.updater.uri=http://ota.randomdroids.com/api
+cm.updater.uri=https://ota.randomdroids.com/api
